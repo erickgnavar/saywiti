@@ -43,6 +43,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    'saywiti.common',
     'saywiti.users',
 ]
 
