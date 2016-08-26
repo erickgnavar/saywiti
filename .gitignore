@@ -49,6 +49,9 @@ htmlcov
 # npm
 node_modules/
 
+# media files
+media/
+
 # Compass
 .sass-cache
 
