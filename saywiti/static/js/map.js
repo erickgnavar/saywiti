@@ -23,15 +23,13 @@ L.control.locate({
   position: 'topright'
 }).addTo(map);
 
-function postMarkerClicked(post) {
-  return function () {
-    $.getJSON(post.url, function (response) {
-      var $home = $('#home');
-      $home.find('.title').html(response.data.name);
-      $home.find('.content').html(response.data.content);
-      sidebar.open('home');
-    });
-  };
+function getPostInfo(post) {
+  $.getJSON(post.url, function (response) {
+    var $home = $('#home');
+    $home.find('.title').html(response.data.name);
+    $home.find('.content').html(response.data.content);
+    sidebar.open('home');
+  });
 }
 
 $(document).on('ready', function () {
@@ -49,7 +47,10 @@ $(document).on('ready', function () {
           icon: icon
         });
         var key = post.category_id;
-        marker.on('click', postMarkerClicked(post));
+        marker.on('click', function () {
+          getPostInfo(post);
+          map.setView(marker.getLatLng(), 15);
+        });
         if (typeof categoryGroups[key] === 'undefined') {
           categoryGroups[key] = new L.LayerGroup();
         }
