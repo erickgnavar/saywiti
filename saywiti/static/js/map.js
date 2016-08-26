@@ -1,3 +1,5 @@
+var categoryGroups = {};
+
 var map = L.map('map', {
   zoomControl: false
 }).setView([-11.9700, -76.9990], 6);
@@ -8,6 +10,10 @@ var zoom = new L.Control.Zoom({
 }).addTo(map);
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+L.control.dialog({
+  anchor: [0, 0]
+}).setContent($('#dialog').html()).addTo(map);
 
 L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -34,7 +40,6 @@ $(document).on('ready', function () {
     method: 'get',
     dataType: 'json',
     success: function (response) {
-      var layers = [];
       response.data.forEach(function (post) {
         var icon = L.icon({
           iconUrl: post.icon,
@@ -43,12 +48,26 @@ $(document).on('ready', function () {
         var marker = L.marker([post.latitude, post.longitude], {
           icon: icon
         });
+        var key = post.category_id;
         marker.on('click', postMarkerClicked(post));
-        layers.push(marker);
+        if (typeof categoryGroups[key] === 'undefined') {
+          categoryGroups[key] = new L.LayerGroup();
+        }
+        categoryGroups[key].addLayer(marker);
       });
-      // TODO: remove this assignment
-      window.posts = L.layerGroup(layers);
-      window.posts.addTo(map);
+      // Add group layers to map
+      Object.keys(categoryGroups).forEach(function (key) {
+        categoryGroups[key].addTo(map);
+      });
+    }
+  });
+  $('.toggle-category').on('change', function () {
+    var $this = $(this);
+    var key = $this.data('category-id');
+    if ($this.is(':checked')) {
+      categoryGroups[key].addTo(map);
+    } else {
+      map.removeLayer(categoryGroups[key]);
     }
   });
 });

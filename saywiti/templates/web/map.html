@@ -3,6 +3,7 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet.css' %}" />
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet-sidebar.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/css/leaflet-dialog.css' %}" />
   <link rel="stylesheet" href="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.css" />
   <style>
     #map {
@@ -53,11 +54,13 @@
     </div>
   </div>
   <div id="map" class="sidebar-map"></div>
+  {% include 'web/_categories_popup.html' %}
 {% endblock content %}
 {% block javascript %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="{% static 'vendor/js/leaflet.js' %}"></script>
   <script src="{% static 'vendor/js/leaflet-sidebar.min.js' %}"></script>
+  <script src="{% static 'vendor/js/leaflet-dialog.js' %}"></script>
   <script src="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
   <script src="{% static 'js/map.js' %}"></script>
 {% endblock javascript %}

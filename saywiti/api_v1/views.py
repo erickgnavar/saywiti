@@ -18,7 +18,8 @@ def posts(request):
             'latitude': post.latitude,
             'longitude': post.longitude,
             'point': json.loads(post.point.geojson),
-            'url': reverse('api_v1:post-detail', kwargs={'post_id': post.id})
+            'url': reverse('api_v1:post-detail', kwargs={'post_id': post.id}),
+            'category_id': post.category_id
         })
     return JsonResponse({'data': data})
 
