@@ -1,3 +1,3 @@
-from .common import *
+from .base import *  # noqa
 
 DEBUG = True

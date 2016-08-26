@@ -42,13 +42,17 @@ DJANGO_APPS = [
     'django.contrib.gis',
 ]
 
+THIRD_PARTY_APPS = [
+    'sorl.thumbnail',
+]
+
 LOCAL_APPS = [
     'saywiti.common',
     'saywiti.users',
     'saywiti.regions',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,3 +145,8 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+THUMBNAIL_PRESERVE_FORMAT = True
