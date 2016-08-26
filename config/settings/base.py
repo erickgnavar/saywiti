@@ -50,6 +50,7 @@ LOCAL_APPS = [
     'saywiti.common',
     'saywiti.users',
     'saywiti.regions',
+    'saywiti.posts',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

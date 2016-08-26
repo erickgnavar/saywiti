@@ -1,2 +1,4 @@
 Django==1.9.7
 psycopg2==2.6.2
+Pillow==3.3.0
+sorl-thumbnail==12.3
