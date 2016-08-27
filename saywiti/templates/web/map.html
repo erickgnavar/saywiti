@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
-{% load static thumbnail %}
+{% load static i18n thumbnail %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet.css' %}" />
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet-sidebar.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'vendor/css/leaflet-dialog.css' %}" />
   <link rel="stylesheet" href="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.css" />
   <style>
     #map {
       height: 800px;
-    }
-    #dialog {
-      display: none;
     }
   </style>
 {% endblock css %}
@@ -19,6 +15,11 @@
     <!-- Nav tabs -->
     <div class="sidebar-tabs">
       <ul role="tablist">
+        <li>
+          <a href="#settings" role="tab">
+            <i class="fa fa-gear"></i>
+          </a>
+        </li>
         <li>
           <a href="#home" role="tab">
             <i class="fa fa-bars"></i>
@@ -32,6 +33,33 @@
     </div>
     <!-- Tab panes -->
     <div class="sidebar-content">
+      <div class="sidebar-pane" id="settings">
+        <h1 class="sidebar-header">
+          {% trans 'Settings' %}
+          <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+        </h1>
+        <br/>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <h4>{% trans 'Categories' %}</h4>
+          </li>
+          {% for category in categories %}
+          <li class="list-group-item">
+            <input name="" type="checkbox" id="toggle-category-{{ category.id }}" class="toggle-category" data-category-id="{{ category.id }}" checked="checked"/>
+            <label for="toggle-category-{{ category.id }}">
+              {% thumbnail category.icon '20x20' as im %}
+              <img alt="{{ category.name }}" src="{{ im.url }}"/>
+              {% endthumbnail %}
+              <span>{{ category.name }}</span>
+            </label>
+            <br/>
+          </li>
+          {% endfor %}
+        </ul>
+        <br/>
+        <div class="content">
+        </div>
+      </div>
       <div class="sidebar-pane" id="home">
         <h1 class="sidebar-header">
           <span class="title"></span>
@@ -54,13 +82,11 @@
     </div>
   </div>
   <div id="map" class="sidebar-map"></div>
-  {% include 'web/_categories_popup.html' %}
 {% endblock content %}
 {% block javascript %}
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="{% static 'vendor/js/leaflet.js' %}"></script>
   <script src="{% static 'vendor/js/leaflet-sidebar.min.js' %}"></script>
-  <script src="{% static 'vendor/js/leaflet-dialog.js' %}"></script>
   <script src="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
   <script src="{% static 'js/map.js' %}"></script>
 {% endblock javascript %}

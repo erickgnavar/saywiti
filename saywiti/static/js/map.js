@@ -11,9 +11,8 @@ var zoom = new L.Control.Zoom({
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
 
-L.control.dialog({
-  anchor: [0, 0]
-}).setContent($('#dialog').html()).addTo(map);
+// Open settings panel at startup
+sidebar.open('settings');
 
 L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
