@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib.gis import admin
 from django.utils.html import format_html
 

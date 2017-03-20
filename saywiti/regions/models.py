@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib.gis.db import models
 from django.contrib.postgres.fields.jsonb import JSONField
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from saywiti.common.models import TimeStampedModel
 
 
-@python_2_unicode_compatible
 class Level(TimeStampedModel):
 
     parent = models.ForeignKey('self', related_name='children', null=True, blank=True)
@@ -21,7 +17,6 @@ class Level(TimeStampedModel):
         return self.name
 
 
-@python_2_unicode_compatible
 class Region(TimeStampedModel):
 
     parent = models.ForeignKey('self', related_name='children', null=True, blank=True)

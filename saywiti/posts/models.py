@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,7 +9,6 @@ from sorl.thumbnail import get_thumbnail
 from saywiti.common.models import TimeStampedModel
 
 
-@python_2_unicode_compatible
 class Category(TimeStampedModel):
 
     name = models.CharField(_('Name'), max_length=100)
@@ -29,7 +25,7 @@ class Category(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        return super(Category, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     @property
     def marker_icon(self):
@@ -37,7 +33,6 @@ class Category(TimeStampedModel):
         return im.url
 
 
-@python_2_unicode_compatible
 class Post(TimeStampedModel):
 
     category = models.ForeignKey('Category', related_name='posts')
@@ -62,7 +57,7 @@ class Post(TimeStampedModel):
         self.slug = slugify(self.name)
         self._create_point()
         self._compile()
-        return super(Post, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def _create_point(self):
         if self.latitude and self.longitude:

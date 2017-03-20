@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.db import models
 from django.utils import timezone
 
@@ -17,4 +15,4 @@ class TimeStampedModel(models.Model):
         if not self.id:
             self.created = timezone.now()
         self.modified = timezone.now()
-        return super(TimeStampedModel, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
