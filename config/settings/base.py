@@ -50,6 +50,7 @@ LOCAL_APPS = [
     'saywiti.common',
     'saywiti.users',
     'saywiti.regions',
+    'saywiti.projects',
     'saywiti.posts',
     'saywiti.web',
     'saywiti.api_v1',

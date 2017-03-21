@@ -10,8 +10,15 @@
     {% endblock css %}
   </head>
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Saywiti project</h1>
+        </div>
+      </div>
+      {% block content %}
+      {% endblock content %}
+    </div>
     {% block javascript %}
     {% endblock javascript %}
   </body>

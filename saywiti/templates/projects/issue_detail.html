@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles i18n %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'vendor/css/leaflet.css' %}" />
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+{% endblock css %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <h2>{{ issue.title }}</h2>
+      <h3>
+        <a href="{% url 'projects:project-detail' issue.category.project.slug %}">{{ issue.category.project.name }}</a>
+      </h3>
+      <small>{{ issue.created }}</small>
+      <hr/>
+      <p>{{ issue.content }}</p>
+    </div>
+    <div class="col-md-4">
+      <div id="map"></div>
+      <hr/>
+      <div>
+        <h3>{% trans 'Related issues' %}</h3>
+        <ul class="list-group">
+        {% for i in related_issues %}
+          <li class="list-group-item">
+            <p>{{ i.title }}</p>
+            <small>{{ i.created }}</small>
+            <a href="{% url 'projects:issue-detail' i.id %}" class="pull-right">{% trans 'See more' %}</a>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="{% static 'vendor/js/leaflet.js' %}"></script>
+  <script>
+    var issue = {
+      point: [{{ issue.point.y }}, {{ issue.point.x }}]
+    };
+  </script>
+  <script src="{% static 'js/issue_detail.js' %}"></script>
+{% endblock javascript %}

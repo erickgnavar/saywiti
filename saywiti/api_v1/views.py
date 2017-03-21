@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import json
-
-from django.core.urlresolvers import reverse
 from django.http import JsonResponse
+from django.core.urlresolvers import reverse
 
 from saywiti.posts.models import Post
+from saywiti.projects.models import Issue
 
 
 def posts(request):
@@ -36,3 +36,22 @@ def post_detail(request, post_id):
         return JsonResponse({
             'message': 'not found'
         }, status=404)
+
+
+def issue_list(request, slug):
+    # TODO: find a better way to add host
+    host = "{}://{}".format(request.scheme, request.get_host())
+    issues = Issue.objects.filter(project__slug=slug)
+    rendered_issues = list(map(lambda x: render_issue(x, host), issues))
+    return JsonResponse({'data': rendered_issues})
+
+
+def render_issue(issue, host):
+    return {
+        'id': issue.id,
+        'title': issue.title,
+        'content': issue.content,
+        'point': json.loads(issue.point.geojson),
+        'category_icon': host + issue.marker_icon,
+        'detail_url': host + reverse('projects:issue-detail', kwargs={'id': issue.id})
+    }

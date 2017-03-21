@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'vendor/css/leaflet.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/css/leaflet.markercluster.css' %}" />
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+{% endblock css %}
+{% block content %}
+  <h1>{{ project.name }}</h1>
+  <div id="map"></div>
+{% endblock content %}
+{% block javascript %}
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="{% static 'vendor/js/leaflet.js' %}"></script>
+  <script src="{% static 'vendor/js/leaflet.markercluster.js' %}"></script>
+  <script>
+    var project = {
+      slug: '{{ project.slug }}'
+    };
+  </script>
+  <script src="{% static 'js/project_detail.js' %}"></script>
+{% endblock javascript %}

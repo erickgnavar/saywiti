@@ -21,5 +21,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('saywiti.web.urls', namespace='web')),
+    url(r'^', include('saywiti.projects.urls', namespace='projects')),
     url(r'^api/v1/', include('saywiti.api_v1.urls', namespace='api_v1')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
