@@ -44,6 +44,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'sorl.thumbnail',
+    'crispy_forms',
 ]
 
 LOCAL_APPS = [
@@ -154,3 +155,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 THUMBNAIL_PRESERVE_FORMAT = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

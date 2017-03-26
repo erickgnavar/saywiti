@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load staticfiles i18n %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet.css' %}" />
   <link rel="stylesheet" href="{% static 'vendor/css/leaflet.markercluster.css' %}" />
@@ -11,6 +11,9 @@
 {% endblock css %}
 {% block content %}
   <h1>{{ project.name }}</h1>
+  <a class="btn btn-primary" href="{% url 'projects:issue-create' project.slug %}">{% trans 'New issue' %}</a>
+  <br/>
+  <br/>
   <div id="map"></div>
 {% endblock content %}
 {% block javascript %}

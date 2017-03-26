@@ -2,7 +2,7 @@ var map = L.map('map', {
   zoomControl: true
 }).setView([-11.9700, -76.9990], 5);
 
-markers = L.markerClusterGroup();
+var markers = L.markerClusterGroup();
 
 L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy <a href="//osm.org/copyright">OpenStreetMap</a> contributors'
